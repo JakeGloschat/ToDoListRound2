@@ -9,11 +9,11 @@ import Foundation
 
 class Goal: Codable {
     let goalName: String
-    let tasks: [Task]
+    var tasks: [Task]
     var isComplete: Bool
     let uuid: UUID
     
-    init(goalName: String, tasks: [Task], isComplete: Bool = false, uuid: UUID = UUID()) {
+    init(goalName: String, tasks: [Task] = [], isComplete: Bool = false, uuid: UUID = UUID()) {
         self.goalName = goalName
         self.tasks = tasks
         self.isComplete = isComplete
