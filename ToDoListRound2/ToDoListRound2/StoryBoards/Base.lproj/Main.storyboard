@@ -31,6 +31,9 @@
                                             <rect key="frame" x="207.33333333333337" y="0.0" width="153.66666666666663" height="28"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="filled" title="Create"/>
+                                            <connections>
+                                                <action selector="createButtonTapped:" destination="dLb-J4-oiw" eventType="touchUpInside" id="ypD-Wp-CmN"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -60,6 +63,9 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="52.333333333333336" height="34.666666666666664"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="checkmark.seal.fill" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="isCompleteButtonTapped:" destination="RZB-sV-pEd" eventType="touchUpInside" id="dWm-8W-XC8"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="(Goal)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5Z-Te-dAm">
                                                     <rect key="frame" x="60.333333333333314" y="0.0" width="253" height="34.666666666666664"/>
@@ -86,7 +92,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="6uG-fQ-AKB" kind="show" id="yVT-v1-Lkc"/>
+                                    <outlet property="goalNameLabel" destination="k5Z-Te-dAm" id="mYX-tF-wbW"/>
+                                    <outlet property="isCompleteButton" destination="CQh-YH-QZR" id="Vaz-g9-weE"/>
+                                    <outlet property="taskCountLabel" destination="zb8-xl-9DD" id="sph-i0-EaB"/>
+                                    <segue destination="6uG-fQ-AKB" kind="show" identifier="toTaskList" id="yVT-v1-Lkc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -129,6 +138,9 @@
                                             <rect key="frame" x="306.33333333333331" y="0.0" width="54.666666666666686" height="28"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="filled" title="Add"/>
+                                            <connections>
+                                                <action selector="addButtonWasTapped:" destination="6uG-fQ-AKB" eventType="touchUpInside" id="1I1-yp-tGG"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -164,6 +176,9 @@
                                                     <rect key="frame" x="284.66666666666669" y="0.0" width="52.333333333333314" height="34.666666666666664"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="checkmark.seal.fill" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="isCompleteButtonWasTapped:" destination="zB3-0L-tgA" eventType="touchUpInside" id="nrr-z1-QtW"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -177,6 +192,10 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="A8N-2i-D8Z" secondAttribute="trailing" constant="8" id="xXi-hT-o8q"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="isCompleteButton" destination="97h-5T-4qW" id="M44-oG-yhl"/>
+                                    <outlet property="taskNameLabel" destination="V0U-zW-2Pk" id="RJR-7G-6wy"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -185,6 +204,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="fE2-u0-yKf"/>
+                    <connections>
+                        <outlet property="addButton" destination="eHu-SZ-Ek5" id="J29-st-RKF"/>
+                        <outlet property="taskNameTextField" destination="p8X-Lu-cAR" id="TCb-hi-yIt"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcQ-Nf-fOa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

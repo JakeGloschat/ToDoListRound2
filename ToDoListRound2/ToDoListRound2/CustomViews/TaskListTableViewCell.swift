@@ -7,17 +7,28 @@
 
 import UIKit
 
-class TaskListTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+protocol TaskListTableViewCellDelegate: AnyObject {
+    func isCompleteButtonwasTapped(_ cell: TaskListTableViewCell)
 }
+class TaskListTableViewCell: UITableViewCell {
+    
+    // MARK: - Outlets
+    @IBOutlet weak var taskNameLabel: UILabel!
+    @IBOutlet weak var isCompleteButton: UIButton!
+    
+    // MARK: - Properties
+    weak var delegate: TaskListTableViewCellDelegate?
+    
+    // MARK: - Functions
+    func updateViews(task: Task) {
+        taskNameLabel.text = task.taskName
+        
+        let imageName = task.isComplete ? "checkmark.seal.fill" : "checkmark.seal"
+        isCompleteButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
+    // MARK: - Actions
+    @IBAction func isCompleteButtonWasTapped(_ sender: Any) {
+        delegate?.isCompleteButtonwasTapped(self)
+    }
+} // End of Class

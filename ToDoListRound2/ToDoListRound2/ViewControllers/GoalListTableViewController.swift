@@ -18,19 +18,25 @@ class GoalListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
+    }
+    
+    // MARK: - Properties
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return GoalController.shared.goals.count
     }
-
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
-
-        // Configure the cell...
-
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as? GoalListTableViewCell else { return UITableViewCell() }
+        
+        let goal = GoalController.shared.goals[indexPath.row]
+        cell.goal = goal
+        cell.delegate = self
+        
         return cell
     }
 
@@ -44,15 +50,36 @@ class GoalListTableViewController: UITableViewController {
         }    
     }
 
+    // MARK: - Helper
+    func updateUI() {
+        self.tableView.reloadData()
+    }
 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
+        guard segue.identifier == "toTaskList",
+              let destinationVC = segue.destination as? TaskListTableViewController,
+              let indexPath = tableView.indexPathForSelectedRow else { return }
+        let goal = GoalController.shared.goals[indexPath.row]
+        destinationVC.goal = goal
+            }
 
     // MARK: - Actions
     
+    @IBAction func createButtonTapped(_ sender: Any) {
+        guard let goalName = newGoalTextField.text,
+              !goalName.isEmpty else { return }
+        GoalController.shared.createGoal(name: goalName)
+        updateUI()
+    }
+}
+
+extension GoalListTableViewController: GoalListTableViewCellDelegate {
+    func isCompleteButtonWasTapped(_ cell: GoalListTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let goal = GoalController.shared.goals[indexPath.row]
+        GoalController.shared.toggleIsComplete(goals: goal)
+        cell.goal = goal
+    }
 }
