@@ -11,7 +11,7 @@ class TaskController {
     
     // MARK: - Functions
     static func createTask(goal: Goal, taskName: String) {
-       let task = Task(taskName: taskName)
+        let task = Task(taskName: taskName)
         goal.tasks.append(task)
     }
     

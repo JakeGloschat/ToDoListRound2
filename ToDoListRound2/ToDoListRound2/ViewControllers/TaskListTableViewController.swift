@@ -44,7 +44,6 @@ class TaskListTableViewController: UITableViewController {
     }
     
     // MARK: - Actions
-    
     @IBAction func addButtonWasTapped(_ sender: Any) {
         guard let taskName = taskNameTextField.text, !taskName.isEmpty,
               let goal = goal else { return }
@@ -70,6 +69,7 @@ extension TaskListTableViewController: TaskListTableViewCellDelegate {
         }
         presentDeleteListAlertController()
     }
+    
     func presentDeleteListAlertController() {
         let alertController = UIAlertController(title: "Delete List", message: "Delete Goal List?", preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)

@@ -12,7 +12,7 @@ protocol GoalListTableViewCellDelegate: AnyObject {
 }
 
 class GoalListTableViewCell: UITableViewCell {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var isCompleteButton: UIButton!
     @IBOutlet weak var goalNameLabel: UILabel!

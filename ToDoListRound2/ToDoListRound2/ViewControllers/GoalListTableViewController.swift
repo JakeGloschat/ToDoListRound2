@@ -8,11 +8,10 @@
 import UIKit
 
 class GoalListTableViewController: UITableViewController {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var newGoalTextField: UITextField!
     @IBOutlet weak var createButton: UIButton!
-    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -22,8 +21,6 @@ class GoalListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         updateUI()
     }
-    
-    // MARK: - Properties
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,8 +36,7 @@ class GoalListTableViewController: UITableViewController {
         
         return cell
     }
-
- 
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -49,24 +45,22 @@ class GoalListTableViewController: UITableViewController {
         } else if editingStyle == .insert {
         }    
     }
-
+    
     // MARK: - Helper
     func updateUI() {
         self.tableView.reloadData()
     }
-
+    
     // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "toTaskList",
               let destinationVC = segue.destination as? TaskListTableViewController,
               let indexPath = tableView.indexPathForSelectedRow else { return }
         let goal = GoalController.shared.goals[indexPath.row]
         destinationVC.goal = goal
-            }
-
-    // MARK: - Actions
+    }
     
+    // MARK: - Actions
     @IBAction func createButtonTapped(_ sender: Any) {
         guard let goalName = newGoalTextField.text,
               !goalName.isEmpty else { return }
